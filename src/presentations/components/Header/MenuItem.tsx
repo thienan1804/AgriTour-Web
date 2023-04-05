@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
 import UserAccount from "../../../data/types/User/UserAccoutn";
 import LockIcon from "@mui/icons-material/Lock";
@@ -7,9 +7,22 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import DefaultAvatar from "../DefaultAvatar";
 import Tippy from "@tippyjs/react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import firebase from "firebase/app";
+import "firebase/firestore";
+
 // Styles
 import classNames from "classnames/bind";
 import styles from "./MenuItem.module.scss";
+import {
+  doc,
+  getDoc,
+  collection,
+  DocumentSnapshot,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
+import { db } from "../../../data/firebase/config";
 
 const cx = classNames.bind(styles);
 
@@ -23,6 +36,26 @@ const MenuItem = (props: MenuItemProps) => {
     localStorage.removeItem("isLoggined");
     navigate("/preview");
   };
+
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    const fetchUsername = async () => {
+      const querySnapshot = await getDocs(
+        query(
+          collection(db, "usersinformation"),
+          where("email", "==", props.user?.email)
+        )
+      );
+      if (!querySnapshot.empty) {
+        const userDoc = querySnapshot.docs[0];
+        setUsername(userDoc.data().username);
+      }
+    };
+    fetchUsername();
+  }, [props.user?.email]);
+
+  console.log("user: ", username);
 
   return (
     <div className={cx("account-dropdown-wrapper")}>
@@ -42,9 +75,7 @@ const MenuItem = (props: MenuItemProps) => {
             placement="right"
             theme="light"
           >
-            <span className={cx("accountinfo-username")}>
-              {props?.user?.displayName}
-            </span>
+            <span className={cx("accountinfo-username")}>{username}</span>
           </Tippy>
           <span className={cx("accountinfo-role")}>{props.user?.email}</span>
         </div>

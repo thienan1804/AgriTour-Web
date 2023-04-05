@@ -3,6 +3,7 @@
 // Styles
 import classNames from "classnames/bind";
 import styles from "./DefaultAvatar.module.scss";
+import images from "../../../assets/images";
 const cx = classNames.bind(styles);
 
 interface DefaultAvatarProps {
@@ -22,7 +23,11 @@ const DefaultAvatar: React.FC<DefaultAvatarProps> = (props) => {
   });
 
   return (
-    <img className={classes} src={avatar ?? ""} alt="supper-app-start-lhu" />
+    <img
+      className={classes}
+      src={avatar ?? images.defaultAvatar}
+      alt="supper-app-start-lhu"
+    />
   );
 };
 

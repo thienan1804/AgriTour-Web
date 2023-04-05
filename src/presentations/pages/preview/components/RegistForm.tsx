@@ -7,51 +7,73 @@ import GoogleIcon from "@mui/icons-material/Google";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 // Internal files
-import { auth } from "../../../../data/firebase/config";
+import { auth, db } from "../../../../data/firebase/config";
 // Styles
 import classNames from "classnames/bind";
 import styles from "./FormLogin.module.scss";
 import { Button, CircularProgress } from "@mui/material";
 import { toast } from "react-toastify";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import useAuth from "../../../../hooks/User/useAuth";
+import { addDoc, collection } from "firebase/firestore";
 const cx = classNames.bind(styles);
 
-interface FormLoginProps {
+interface FormFormRegistProps {
   onLoginWithGoogle: () => void;
   setShowModalLogin: React.Dispatch<React.SetStateAction<boolean>>;
   setShowModalRegist: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const FormLogin = (props: FormLoginProps) => {
+const FormRegist = (props: FormFormRegistProps) => {
   let [isDisable, setDisable] = useState(false);
 
   const formik = useFormik({
     initialValues: {
-      username: "",
+      name: "",
+      usernameRegist: "",
       password: "",
+      confirmPassword: "",
     },
 
     // * Rule of formik.values
     validationSchema: Yup.object({
-      username: Yup.string().required("Vui lòng nhập tên người dùng"),
+      name: Yup.string()
+        .required("Vui lòng nhập họ và tên")
+        .min(8, "Họ và tên phải chứa ít nhất 8 kí tự"),
+      usernameRegist: Yup.string().required("Vui lòng nhập tên người dùng"),
       password: Yup.string().required("Vui lòng nhập mật khẩu"),
+      confirmPassword: Yup.string()
+        .required("Vui lòng xác nhận mật khẩu")
+        // * oneOf: check matches with input has props: name = 'password'
+        .oneOf([Yup.ref("password")], "Mật khẩu phải khớp"),
     }),
 
     onSubmit: () => {
-      signInWithEmailAndPassword(
+      createUserWithEmailAndPassword(
         auth,
-        formik.values.username,
+        formik.values.usernameRegist,
         formik.values.password
       )
-        .then((userCredentail) => {
+        .then(async (userCredentail) => {
           console.log(userCredentail);
           localStorage.setItem("isLoggined", userCredentail.user.uid);
+          const username = formik.values.name;
+          const email = formik.values.usernameRegist;
+
+          await addDoc(collection(db, "usersinformation"), { username, email })
+            .then((re) => {
+              toast.success("Dữ liệu đã được thêm vào");
+            })
+            .catch((error) => {
+              toast.error(error.message);
+            });
 
           window.location.href = "/";
         })
         .catch((error) => {
-          toast.error("Tên đăng nhập hoặc mật khẩu không khớp");
+          if (error.code == "auth/email-already-in-use") {
+            toast.error("Email đã tồn tại");
+          }
         });
       setDisable(false);
     },
@@ -60,21 +82,34 @@ const FormLogin = (props: FormLoginProps) => {
 
   return (
     <form className={cx("form-wrapper")} onSubmit={formik.handleSubmit}>
-      <label htmlFor="username">Email người dùng</label>
+      <label htmlFor="name">Họ và tên người dùng</label>
+      <div className={cx("input-wrapper")}>
+        <PermIdentityIcon />
+        <input
+          type="text"
+          id="name"
+          placeholder="Name"
+          value={formik.values.name}
+          onChange={formik.handleChange}
+        />
+      </div>
+      {formik.errors.name && (
+        <p className={cx("errors")}>{formik.errors.name}</p>
+      )}
+
+      <label htmlFor="usernameRegist">Email người dùng</label>
       <div className={cx("input-wrapper")}>
         <PermIdentityIcon />
         <input
           type="email"
-          id="username"
-          autoComplete="off"
-          name="username"
+          id="usernameRegist"
           placeholder="Email"
-          value={formik.values.username}
+          value={formik.values.usernameRegist}
           onChange={formik.handleChange}
         />
       </div>
-      {formik.errors.username && (
-        <p className={cx("errors")}>{formik.errors.username}</p>
+      {formik.errors.usernameRegist && (
+        <p className={cx("errors")}>{formik.errors.usernameRegist}</p>
       )}
 
       <label htmlFor="password">Mật khẩu</label>
@@ -83,9 +118,7 @@ const FormLogin = (props: FormLoginProps) => {
         <input
           type="password"
           id="password"
-          name="password"
           placeholder="Mật khẩu"
-          autoComplete="off"
           value={formik.values.password}
           onChange={formik.handleChange}
         />
@@ -94,15 +127,27 @@ const FormLogin = (props: FormLoginProps) => {
         <p className={cx("errors")}>{formik.errors.password}</p>
       )}
 
-      <div className={cx("forgot-pass")}>
-        <a href="/forgot-password">Quên mật khẩu</a>
+      <label htmlFor="confirmPassword">Nhập lại mật khẩu</label>
+      <div className={cx("input-wrapper")}>
+        <LockOpenIcon />
+        <input
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          placeholder="Nhập lại mật khẩu"
+          value={formik.values.confirmPassword}
+          onChange={formik.handleChange}
+        />
       </div>
+      {formik.errors.confirmPassword && (
+        <p className={cx("errors")}>{formik.errors.confirmPassword}</p>
+      )}
 
       <div
         style={{ justifyContent: "center", textDecoration: "none" }}
         className={cx("forgot-pass")}
       >
-        Bạn chưa có tài khoản?{" "}
+        Bạn đã có tài khoản?{" "}
         <p
           style={{
             marginLeft: "8px",
@@ -110,16 +155,16 @@ const FormLogin = (props: FormLoginProps) => {
             cursor: "pointer",
           }}
           onClick={() => {
-            props.setShowModalLogin(false);
-            props.setShowModalRegist(true);
+            props.setShowModalLogin(true);
+            props.setShowModalRegist(false);
           }}
         >
-          Đăng ký ngay!
+          Đăng nhập ngay!
         </p>
       </div>
 
       <button type="submit" className={cx("btn", "login")} disabled={isDisable}>
-        ĐĂNG NHẬP
+        ĐĂNG KÝ
         {isDisable && (
           <CircularProgress
             size={14}
@@ -133,10 +178,10 @@ const FormLogin = (props: FormLoginProps) => {
         onClick={props.onLoginWithGoogle}
         className={cx("btn", "regist")}
       >
-        ĐĂNG NHẬP VỚI GOOGLE
+        ĐĂNG KÝ VỚI GOOGLE
       </Button>
     </form>
   );
 };
 
-export default FormLogin;
+export default FormRegist;

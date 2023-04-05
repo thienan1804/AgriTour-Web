@@ -6,7 +6,12 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 // Internal files
 import { headerData } from "../../../components/Header/HeaderData";
 import { auth } from "../../../../data/firebase/config";
-
+import DefaultDropDown from "../../../components/DefaultDropDown/DefaultDropDown";
+import PlatForm from "../../../components/Header/PlatForm";
+import DefaultModal from "../../../components/defaultModal/DefaultModal";
+import FormLogin from "./FormLogin";
+import DefaultAuthLayout from "../../../components/DefaultAuthLayOut";
+import FormRegist from "./RegistForm";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import useAuth from "../../../../hooks/User/useAuth";
@@ -15,11 +20,8 @@ import { useNavigate, NavigateFunction } from "react-router-dom";
 // Styles
 import classNames from "classnames/bind";
 import styles from "./Header.module.scss";
-import DefaultDropDown from "../../../components/DefaultDropDown/DefaultDropDown";
-import PlatForm from "../../../components/Header/PlatForm";
-import DefaultModal from "../../../components/defaultModal/DefaultModal";
-import FormLogin from "./FormLogin";
-import DefaultAuthLayout from "../../../components/DefaultAuthLayOut";
+import { toast } from "react-toastify";
+
 const cx = classNames.bind(styles);
 
 const fbProvider = new GoogleAuthProvider();
@@ -29,6 +31,7 @@ const HeaderRight = () => {
   const navigate: NavigateFunction = useNavigate();
   const [isRenderPlatForm, setIsRenderPlatForm] = useState(false);
   const [showModalLogin, setShowModalLogin] = useState(false);
+  const [showModalRegist, setShowModalRegist] = useState(false);
 
   const handleLogin = () => {
     signInWithPopup(auth, fbProvider)
@@ -45,7 +48,7 @@ const HeaderRight = () => {
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        toast(error);
       });
     setLoading(false);
   };
@@ -97,14 +100,36 @@ const HeaderRight = () => {
       </ul>
       {showModalLogin && (
         <DefaultModal
-          title="Đăng nhập"
-          overrideMaxWidth={{ lg: "1200px", md: "1200px" }}
+          title=""
+          overrideMaxWidth={{ lg: "1000px", md: "1000px" }}
           onClose={() => {
             setShowModalLogin(false);
           }}
         >
-          <DefaultAuthLayout title="ĐĂNG NHẬP">
-            <FormLogin onLoginWithGoogle={handleLogin} />
+          <DefaultAuthLayout showModalLogin={showModalLogin} title="Đăng nhập">
+            <FormLogin
+              setShowModalLogin={setShowModalLogin}
+              setShowModalRegist={setShowModalRegist}
+              onLoginWithGoogle={handleLogin}
+            />
+          </DefaultAuthLayout>
+        </DefaultModal>
+      )}
+
+      {showModalRegist && (
+        <DefaultModal
+          title=""
+          overrideMaxWidth={{ lg: "1000px", md: "1000px" }}
+          onClose={() => {
+            setShowModalRegist(false);
+          }}
+        >
+          <DefaultAuthLayout title="Đăng ký">
+            <FormRegist
+              setShowModalLogin={setShowModalLogin}
+              setShowModalRegist={setShowModalRegist}
+              onLoginWithGoogle={handleLogin}
+            />
           </DefaultAuthLayout>
         </DefaultModal>
       )}

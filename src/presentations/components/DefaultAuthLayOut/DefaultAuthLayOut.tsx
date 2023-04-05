@@ -1,8 +1,8 @@
 // External files
 import React from "react";
 import Grid from "@mui/material/Grid";
+import StarIcon from "@mui/icons-material/Star";
 // Internal files
-import images from "../../../assets/images";
 // Styles
 import classNames from "classnames/bind";
 import styles from "./DefaultAuthLayou.module.scss";
@@ -11,6 +11,7 @@ const cx = classNames.bind(styles);
 interface DefaultAuthLayoutProps {
   children: React.ReactElement;
   title: string;
+  showModalLogin?: boolean;
 }
 
 const DefaultAuthLayout: React.FC<DefaultAuthLayoutProps> = (props) => {
@@ -19,22 +20,27 @@ const DefaultAuthLayout: React.FC<DefaultAuthLayoutProps> = (props) => {
     <Grid container columns={12} className={cx("wrapper")}>
       <Grid
         item
-        lg={8}
-        md={8}
+        lg={12}
+        md={12}
         sx={{ display: { lg: "block", md: "block", sm: "none", xs: "none" } }}
-        className={cx("img-wrapper")}
-      ></Grid>
-      <Grid item lg={4} md={4} sm={12} xs={12} className={cx("form-wrapper")}>
-        <div className={cx("LogoMG-wrapper")}>
-          <img
-            src={
-              "https://o.remove.bg/downloads/c86b7b6e-9787-489d-8e56-4d1908a5ecf0/image-removebg-preview.png"
-            }
-            alt="logoMG"
-          />
+        className={
+          props.showModalLogin
+            ? cx("img-wrapper")
+            : cx("img-wrapper", "regist-wrapper")
+        }
+      >
+        <div className={cx("slogan")}>
+          Fly high,
+          <br /> above the sky.
+          <br />
+          <span>
+            comfortable, secure, your way <StarIcon /> <StarIcon /> <StarIcon />
+          </span>
         </div>
-        <h4>{title}</h4>
-        {children}
+        <Grid item lg={4} md={4} sm={12} xs={12} className={cx("form-wrapper")}>
+          <h4>{title}</h4>
+          {children}
+        </Grid>
       </Grid>
     </Grid>
   );

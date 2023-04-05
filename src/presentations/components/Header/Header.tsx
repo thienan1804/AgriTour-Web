@@ -19,7 +19,7 @@ const Header = () => {
     <Grid container columns={12} className={cx("wrapper")}>
       <Grid className={cx("logo-wrapper")} item lg={2} md={2} sm={6} xs={6}>
         <Link to="/" className={cx("home-url")}>
-          <img className={cx("logo")} src={images.logoRemoveBg} alt="" />
+          <img className={cx("logo")} src={images.logoAgri} alt="" />
         </Link>
       </Grid>
       <Grid

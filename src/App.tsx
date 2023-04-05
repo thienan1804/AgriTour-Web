@@ -18,6 +18,7 @@ const App: React.FC = () => {
         <Route element={<RedirectRoute path="/" />}>
           <Route path="/preview" element={<PreviewPage />} />
         </Route>
+
         <Route path="*" element={<NotFound />} />
         {/* Private Route */}
         <Route path="/" element={<PrivateRoute />}>

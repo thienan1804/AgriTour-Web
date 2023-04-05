@@ -8,15 +8,6 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import "firebase/compat/analytics";
 
-// type FirebaseConfig = {
-//   apiKey: string;
-//   authDomain: string;
-//   projectId: string;
-//   storageBucket: string;
-//   messagingSenderId: string;
-//   appId: string;
-//   measurementId: string;
-// };
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -36,3 +27,4 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 export { auth, db, app };
+

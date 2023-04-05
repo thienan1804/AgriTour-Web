@@ -25,6 +25,7 @@ const images = {
   featureImg1: require("../images/Blog/featureImg1.png"),
   bannerLogin: require("../images/bannerLogin.png"),
   logoAgri: require("../images/logoAgri.png"),
+  defaultAvatar: require("../images/avatar.webp"),
 };
 
 export default images;
