@@ -1,0 +1,251 @@
+.container {
+  padding: 38px 76px;
+  color: var(--black-color);
+}
+
+.title {
+  font-weight: 700;
+  font-size: 2.8rem;
+}
+
+.paragraph {
+  font-size: 1.7rem;
+  margin: 30px 0;
+}
+
+.similar-app-title {
+  font-weight: 600;
+  font-size: 1.6rem;
+  text-align: right;
+}
+
+.similar-app-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.similar-app-img {
+  width: 60px;
+  object-fit: contain;
+  margin-left: 28px;
+  height: 80px;
+}
+
+.feature-wrapper {
+  display: flex;
+  justify-content: center;
+
+  img {
+    width: 75%;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+.see-more {
+  width: 100%;
+  text-align: center;
+  padding: 40px 0;
+  border-top: 1px solid var(--gray-color);
+
+  button {
+    padding: 12px 26px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    box-shadow: 0 8px 0 var(--second-color);
+    transition: 0.3s;
+    background-color: var(--yellow-color);
+
+    &:hover {
+      background-color: var(--yellow-color);
+      box-shadow: 0 8px 0 var(--second-color);
+      opacity: 0.9;
+    }
+
+    &:active {
+      box-shadow: none;
+      transform: translateY(5px);
+    }
+  }
+}
+
+// About
+.about-wrapper {
+  background-color: #d8def5;
+  padding: 38px 76px;
+}
+
+.about-title {
+  display: block;
+  width: 100%;
+  font-size: 2.8rem;
+  color: var(--black-color);
+  text-align: center;
+
+  span {
+    color: var(--second-color);
+  }
+}
+
+.our-team-wrapper {
+  justify-content: space-between !important;
+  margin-top: 30px;
+  overflow: hidden;
+}
+
+.our-team-info-wrapper {
+  overflow: hidden;
+  border-radius: 8px;
+  position: relative;
+  cursor: pointer;
+
+  &:after {
+    content: "";
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: -100%;
+    height: 100%;
+    background-color: #e52626;
+    opacity: 0.3;
+    transition: 0.5s;
+    z-index: 1;
+  }
+
+  &:hover:after {
+    bottom: 0;
+  }
+
+  &:hover .our-team-info {
+    transform: scale(1.5);
+    transition: all 5s;
+  }
+
+  &:hover .our-team-item {
+    bottom: 0;
+  }
+}
+
+.our-team-info {
+  overflow: hidden;
+  width: 100%;
+  height: 332px;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.9;
+}
+
+.our-team-item {
+  position: absolute;
+  background-color: var(--black-color);
+  bottom: -100%;
+  transition: all 0.5s;
+  right: 0;
+  width: 100%;
+  text-align: right;
+  padding: 8px 8px 8px 0;
+  z-index: 2;
+
+  h3 {
+    // font-size: 2rem;
+    color: var(--white-color);
+    opacity: 0.8;
+    text-transform: uppercase;
+  }
+
+  p {
+    font-size: 1.4rem;
+    color: #e52626;
+    font-weight: 700;
+  }
+
+  svg {
+    width: 24px;
+    height: auto;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+// Sponors
+
+.sponsor-wrapper {
+  padding: 38px 76px;
+}
+
+.sponsor-container {
+  margin-top: 20px;
+}
+
+.sponsor-logo-wrapper {
+  text-align: center;
+  margin-top: 20px;
+
+  img {
+    width: 60%;
+    object-fit: contain;
+    height: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    padding: 38px 46px;
+  }
+
+  .title {
+    font-size: 2.2rem;
+    text-align: center;
+  }
+
+  .paragraph {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .similar-app-title {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  .similar-app-wrapper {
+    display: block;
+    text-align: center;
+  }
+
+  .see-more {
+    button {
+      padding: 10px 22px;
+      font-size: 1.2rem;
+    }
+  }
+
+  .our-team-info-wrapper {
+    margin: 10px 0 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .about-wrapper {
+    padding: 38px 46px;
+  }
+
+  .our-team-item {
+    text-align: center;
+  }
+  .sponsor-wrapper {
+    padding: 38px 46px;
+  }
+
+  .sponsor-logo-wrapper {
+    img {
+      width: 70%;
+    }
+  }
+
+  .about-title {
+    font-size: 2.4rem;
+  }
+}

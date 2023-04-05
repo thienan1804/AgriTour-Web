@@ -1,0 +1,30 @@
+.go-top {
+  display: block;
+  text-decoration: none;
+  color: var(--white-color);
+  position: fixed;
+  bottom: 100px;
+  right: 8px;
+  background-color: var(--second-color);
+  padding: 8px 12px;
+  border-radius: 4px;
+  //   transform: translateX(150%);
+  z-index: 4;
+  transition: transform linear 0.2s;
+  -moz-transition: transform linear 0.2s;
+  -o-transition: transform linear 0.2s;
+  -ms-transition: transform linear 0.2s;
+  -webkit-transition: transform linear 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  svg {
+    font-size: 3rem;
+  }
+}
+
+.go-top.active {
+  transform: translateX(0);
+}

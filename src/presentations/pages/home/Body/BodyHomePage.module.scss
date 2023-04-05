@@ -1,0 +1,165 @@
+.wrapper {
+  height: max-content;
+}
+
+.roadYo-wrapper {
+  padding: 37px 0 0 67px;
+}
+
+.roadYo-img {
+  width: 40%;
+  height: auto;
+}
+
+.roadYo-title {
+  margin-top: 12px;
+  color: var(--black-color);
+  font-size: 4rem;
+  font-weight: 550;
+
+  span {
+    color: var(--yellow-color);
+  }
+}
+
+.banner {
+  background-image: url("../../../../assets/images/AppYo.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 600px;
+}
+
+.slogan {
+  color: var(--text-color);
+  font-size: 1.4rem;
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  text-align: center;
+  font-weight: 600;
+
+  span {
+    color: var(--black-color);
+    font-weight: 800;
+  }
+}
+
+// QC
+.qc-wrapper {
+  background-color: var(--yellow-color);
+  color: var(--black-color);
+  margin-top: 50px;
+}
+
+.qc-content {
+  padding: 38px 76px;
+}
+
+.qc-content-title {
+  font-size: 3.2rem;
+  font-weight: 800;
+  text-transform: capitalize;
+
+  span {
+    color: var(--primary-color);
+  }
+}
+
+.qc-content-paragraph {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-top: 20px;
+  span {
+    color: var(--primary-color);
+    font-weight: 600;
+  }
+}
+
+.qc-img-wrapper {
+  padding: 0 30px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+// feature
+.feature-supper-app {
+  padding: 38px 76px;
+
+  h2 {
+    display: block;
+    width: 100%;
+    font-size: 2.8rem;
+    text-align: center;
+    color: var(--black-color);
+    margin-bottom: 19px;
+
+    strong {
+      color: var(--primary-color);
+    }
+
+    span {
+      color: var(--second-color);
+    }
+  }
+  p {
+    text-align: center;
+  }
+}
+
+@media (max-width: 900px) {
+  .roadYo-wrapper {
+    padding: 0;
+    text-align: center;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 900px) {
+  .roadYo-title {
+    font-size: 3rem;
+  }
+
+  .banner {
+    height: 500px;
+    background-position: center;
+  }
+
+  .roadYo-img {
+    width: 35%;
+  }
+}
+
+@media (max-width: 640px) {
+  .roadYo-img {
+    width: 60%;
+  }
+
+  .banner {
+    height: 400px;
+    background-position: center;
+  }
+  .roadYo-title {
+    font-size: 2rem;
+  }
+  .qc-content-title {
+    font-size: 2.2rem;
+    text-align: center;
+  }
+  .qc-content {
+    padding: 38px 46px;
+  }
+  .feature-supper-app {
+    padding: 38px 46px;
+
+    h2 {
+      font-size: 2.2rem;
+    }
+
+    p {
+      font-size: 1.4rem;
+    }
+  }
+}
