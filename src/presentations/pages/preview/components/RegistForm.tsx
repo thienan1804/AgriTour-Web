@@ -62,7 +62,7 @@ const FormRegist = (props: FormFormRegistProps) => {
 
           await addDoc(collection(db, "usersinformation"), { username, email })
             .then((re) => {
-              toast.success("Dữ liệu đã được thêm vào");
+              toast.success("Đăng ký thành công");
             })
             .catch((error) => {
               toast.error(error.message);
