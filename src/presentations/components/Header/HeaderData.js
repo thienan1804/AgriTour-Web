@@ -1,5 +1,8 @@
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ChatIcon from '@mui/icons-material/Chat';
 
 export const headerData = [
   {
@@ -13,7 +16,7 @@ export const headerData = [
     path: "/app",
   },
   {
-    title: "Nền tảng",
+    title: "Dịch vụ",
     icon: <KeyboardArrowDownIcon />,
     path: "",
   },
@@ -33,3 +36,22 @@ export const headerData = [
     path: "/login",
   },
 ];
+
+export const menuItemData = [
+  {
+    icon: <ShoppingBagIcon />,
+    title: "Đơn hàng",
+  },
+  {
+    icon: <ChatIcon />,
+    title: "Đánh giá",
+  },
+  {
+    icon: <FavoriteIcon />,
+    title: "Yêu thích",
+  },
+  {
+    icon: <AccountCircleIcon />,
+    title: "Tài khoản",
+  },
+]

@@ -1,5 +1,5 @@
 .wrapper {
-  border-top: 2px solid var(--second-color);
+  border-top: 2px solid var(--gray-color);
   background-color: var(--border-color);
 
   p {
@@ -23,7 +23,7 @@
 
   h4 {
     font-size: 2rem;
-    color: var(--second-color);
+    color: var(--primary-color);
   }
 }
 
@@ -33,7 +33,7 @@
   cursor: pointer;
 
   &:hover {
-    color: var(--blue-color);
+    color: var(--green-hover-color);
   }
 }
 

@@ -1,7 +1,7 @@
 // External files
 import React from "react";
 import { Grid } from "@mui/material";
-import Body from "./Body";
+import BodyHomePage from "./BodyHomePage/BodyHomePage";
 // Internal files
 import DefaultLayout from "../../components/DefaultLayout";
 // Styles
@@ -9,7 +9,7 @@ import DefaultLayout from "../../components/DefaultLayout";
 const HomePage = () => {
   return (
     <Grid>
-      <DefaultLayout body={<Body />} />
+      <DefaultLayout body={<BodyHomePage />} />
     </Grid>
   );
 };

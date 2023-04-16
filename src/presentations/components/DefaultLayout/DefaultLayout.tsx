@@ -17,14 +17,6 @@ interface DefaultLayoutProps {
 const Footer = React.lazy(() => import("../Footer"));
 
 const DefaultLayout = (props: DefaultLayoutProps) => {
-  const [checkPreview, setCheckPreview] = useState(false);
-
-  useEffect(() => {
-    if (window.location.href.indexOf("preview") !== -1) {
-      setCheckPreview(true);
-    }
-  }, [checkPreview]);
-
   const [goTop, setGoTop] = useState(false);
 
   window.addEventListener("scroll", () => {
@@ -37,7 +29,7 @@ const DefaultLayout = (props: DefaultLayoutProps) => {
 
   return (
     <Grid>
-      {checkPreview ? <PreviewHeader /> : <Header />}
+      <Header />
       <Grid
         sx={{
           margin: {

@@ -1,19 +1,13 @@
 .wrapper {
-  // overflow: hidden;
-  // overflow-y: scroll;
   width: 100%;
-  height: 610px;
-}
-
-.regist-wrapper {
-  height: 49em !important;
+  overflow: hidden;
+  height: 600px;
 }
 
 .img-wrapper {
   height: 100%;
   background-image: url("https://www.ishn.com/ext/resources/900x550/airplane-plane-flight-900.jpg?1583412590");
   background-size: cover;
-  background-attachment: fixed;
   background-position: center center;
   background-repeat: no-repeat;
   transition: transform 1.2s ease-in-out;
@@ -31,6 +25,7 @@
 }
 
 .form-wrapper {
+  width: 28%;
   padding: 4% 0 0 0;
   margin-right: 4% !important;
   z-index: 10;

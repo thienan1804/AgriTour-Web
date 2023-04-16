@@ -3,13 +3,13 @@ import React from "react";
 import { Grid } from "@mui/material";
 // Internal files
 import DefaultLayout from "../../components/DefaultLayout";
-import Body from "../home/Body";
+import BodyHomePage from "../home/BodyHomePage/BodyHomePage";
 // Styles
 
 const PreviewPage = () => {
   return (
     <Grid>
-      <DefaultLayout body={<Body />} />
+      <DefaultLayout body={<BodyHomePage />} />
     </Grid>
   );
 };

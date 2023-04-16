@@ -10,37 +10,25 @@ const cx = classNames.bind(styles);
 const PlatForm = () => {
   const items = [
     {
-      img: images.platFormOnPc,
-      title: "Web",
-      description: "Chrome/FireFox/Safari",
+      title: "Quản lý quỹ đất nông nghiệp",
     },
     {
-      img: images.platFormOnMobile,
-      title: "App",
-      description: "IOS/Androi",
+      title: "Quản lý cho thuê đất trồng cây",
+    },
+    {
+      title: "Dịch vụ cá nhân hóa sở hữu đặc sản nông sản địa phương",
+    },
+    {
+      title: "Thúc đẩy du lịch nông nghiệp tại địa phương",
     },
   ];
   return (
     <Grid className={cx("wrapper")}>
-      <Carousel className={cx("carousel-wrapper")}>
-        {items.map((item, index) => (
-          <Grid key={index} className={cx("content-wrapper")}>
-            <img
-              src={item.img}
-              className={cx(item.img == images.platFormOnPc ? "onPc" : "onMB")}
-              alt="supper-app-start-lhu platform"
-            />
-            <h2
-              className={cx(
-                item.img == images.platFormOnPc ? "titlePc" : "titleMB"
-              )}
-            >
-              {item.title}
-            </h2>
-            <h2 className={cx("description")}>{item.description}</h2>
-          </Grid>
-        ))}
-      </Carousel>
+      {items.map((item, i) => (
+        <Grid key={i} className={cx("service-wrapper")}>
+          <span>{item.title}</span>
+        </Grid>
+      ))}
     </Grid>
   );
 };

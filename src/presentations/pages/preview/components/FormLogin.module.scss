@@ -116,10 +116,6 @@
   }
 }
 
-.errors {
-  width: 100%;
-  font-family: var(--font-family);
-  font-size: 1.4rem;
-  margin: 8px 0 0 8px;
-  color: var(--second-color);
+.error {
+  border: 1px solid var(--pink-hover-color);
 }

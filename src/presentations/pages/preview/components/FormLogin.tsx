@@ -8,13 +8,14 @@ import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 // Internal files
 import { auth } from "../../../../data/firebase/config";
-// Styles
-import classNames from "classnames/bind";
-import styles from "./FormLogin.module.scss";
 import { Button, CircularProgress } from "@mui/material";
 import { toast } from "react-toastify";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import useAuth from "../../../../hooks/User/useAuth";
+// Styles
+import classNames from "classnames/bind";
+import styles from "./FormLogin.module.scss";
+
 const cx = classNames.bind(styles);
 
 interface FormLoginProps {
@@ -61,7 +62,13 @@ const FormLogin = (props: FormLoginProps) => {
   return (
     <form className={cx("form-wrapper")} onSubmit={formik.handleSubmit}>
       <label htmlFor="username">Email người dùng</label>
-      <div className={cx("input-wrapper")}>
+      <div
+        className={
+          !formik.errors.username
+            ? cx("input-wrapper")
+            : cx("input-wrapper", "error")
+        }
+      >
         <PermIdentityIcon />
         <input
           type="email"
@@ -73,12 +80,15 @@ const FormLogin = (props: FormLoginProps) => {
           onChange={formik.handleChange}
         />
       </div>
-      {formik.errors.username && (
-        <p className={cx("errors")}>{formik.errors.username}</p>
-      )}
 
       <label htmlFor="password">Mật khẩu</label>
-      <div className={cx("input-wrapper")}>
+      <div
+        className={
+          !formik.errors.password
+            ? cx("input-wrapper")
+            : cx("input-wrapper", "error")
+        }
+      >
         <LockOpenIcon />
         <input
           type="password"
@@ -90,32 +100,9 @@ const FormLogin = (props: FormLoginProps) => {
           onChange={formik.handleChange}
         />
       </div>
-      {formik.errors.password && (
-        <p className={cx("errors")}>{formik.errors.password}</p>
-      )}
 
       <div className={cx("forgot-pass")}>
         <a href="/forgot-password">Quên mật khẩu</a>
-      </div>
-
-      <div
-        style={{ justifyContent: "center", textDecoration: "none" }}
-        className={cx("forgot-pass")}
-      >
-        Bạn chưa có tài khoản?{" "}
-        <p
-          style={{
-            marginLeft: "8px",
-            color: "var(--blue-color)",
-            cursor: "pointer",
-          }}
-          onClick={() => {
-            props.setShowModalLogin(false);
-            props.setShowModalRegist(true);
-          }}
-        >
-          Đăng ký ngay!
-        </p>
       </div>
 
       <button type="submit" className={cx("btn", "login")} disabled={isDisable}>

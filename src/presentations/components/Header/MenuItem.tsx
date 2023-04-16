@@ -1,27 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Grid } from "@mui/material";
 import UserAccount from "../../../data/types/User/UserAccoutn";
-import LockIcon from "@mui/icons-material/Lock";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Button from "@mui/material/Button";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import DefaultAvatar from "../DefaultAvatar";
 import Tippy from "@tippyjs/react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import firebase from "firebase/app";
 import "firebase/firestore";
+
+import { menuItemData } from "./HeaderData";
 
 // Styles
 import classNames from "classnames/bind";
 import styles from "./MenuItem.module.scss";
-import {
-  doc,
-  getDoc,
-  collection,
-  DocumentSnapshot,
-  getDocs,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../../data/firebase/config";
 
 const cx = classNames.bind(styles);
@@ -75,22 +67,26 @@ const MenuItem = (props: MenuItemProps) => {
             placement="right"
             theme="light"
           >
-            <span className={cx("accountinfo-username")}>{username}</span>
+            <span className={cx("accountinfo-username")}>
+              {username ? username : props.user?.displayName}
+            </span>
           </Tippy>
           <span className={cx("accountinfo-role")}>{props.user?.email}</span>
         </div>
       </div>
-      <div className={cx("change-pass")}>
-        <div className={cx("change-pass-icon")}>
-          <LockIcon />
+
+      {menuItemData.map((menuItem, index) => (
+        <div className={cx("change-pass")} key={index}>
+          <div className={cx("change-pass-icon")}>{menuItem.icon}</div>
+          <div className={cx("change-pass-title")}>
+            <a href="/account">{menuItem.title}</a>
+          </div>
+          <span className={cx("change-nav-pass-icon")}>
+            <KeyboardArrowRightIcon />
+          </span>
         </div>
-        <div className={cx("change-pass-title")}>
-          <p>Đổi mật khẩu</p>
-        </div>
-        <span className={cx("change-nav-pass-icon")}>
-          <KeyboardArrowRightIcon />
-        </span>
-      </div>
+      ))}
+
       <div className={cx("log-out-wrapper")}>
         <Button
           variant="contained"

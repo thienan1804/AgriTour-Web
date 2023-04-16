@@ -30,7 +30,7 @@ const FooterSocial = () => {
         <Grid className={cx("logo-wrapper")} item lg={3} md={3} xs={12} sm={3}>
           <img
             className={cx("logo")}
-            src={images.logoRemoveBg}
+            src={images.logoAgri}
             alt="supper-app-start-lhu logo"
           />
           <p>

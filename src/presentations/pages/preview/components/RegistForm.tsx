@@ -8,14 +8,15 @@ import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 // Internal files
 import { auth, db } from "../../../../data/firebase/config";
-// Styles
-import classNames from "classnames/bind";
-import styles from "./FormLogin.module.scss";
 import { Button, CircularProgress } from "@mui/material";
 import { toast } from "react-toastify";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import useAuth from "../../../../hooks/User/useAuth";
 import { addDoc, collection } from "firebase/firestore";
+// Styles
+import classNames from "classnames/bind";
+import styles from "./FormLogin.module.scss";
+
 const cx = classNames.bind(styles);
 
 interface FormFormRegistProps {
@@ -71,9 +72,7 @@ const FormRegist = (props: FormFormRegistProps) => {
           window.location.href = "/";
         })
         .catch((error) => {
-          if (error.code == "auth/email-already-in-use") {
-            toast.error("Email đã tồn tại");
-          }
+          toast.error(error.message);
         });
       setDisable(false);
     },
@@ -83,7 +82,13 @@ const FormRegist = (props: FormFormRegistProps) => {
   return (
     <form className={cx("form-wrapper")} onSubmit={formik.handleSubmit}>
       <label htmlFor="name">Họ và tên người dùng</label>
-      <div className={cx("input-wrapper")}>
+      <div
+        className={
+          !formik.errors.name
+            ? cx("input-wrapper")
+            : cx("input-wrapper", "error")
+        }
+      >
         <PermIdentityIcon />
         <input
           type="text"
@@ -93,12 +98,15 @@ const FormRegist = (props: FormFormRegistProps) => {
           onChange={formik.handleChange}
         />
       </div>
-      {formik.errors.name && (
-        <p className={cx("errors")}>{formik.errors.name}</p>
-      )}
 
       <label htmlFor="usernameRegist">Email người dùng</label>
-      <div className={cx("input-wrapper")}>
+      <div
+        className={
+          !formik.errors.usernameRegist
+            ? cx("input-wrapper")
+            : cx("input-wrapper", "error")
+        }
+      >
         <PermIdentityIcon />
         <input
           type="email"
@@ -108,12 +116,15 @@ const FormRegist = (props: FormFormRegistProps) => {
           onChange={formik.handleChange}
         />
       </div>
-      {formik.errors.usernameRegist && (
-        <p className={cx("errors")}>{formik.errors.usernameRegist}</p>
-      )}
 
       <label htmlFor="password">Mật khẩu</label>
-      <div className={cx("input-wrapper")}>
+      <div
+        className={
+          !formik.errors.password
+            ? cx("input-wrapper")
+            : cx("input-wrapper", "error")
+        }
+      >
         <LockOpenIcon />
         <input
           type="password"
@@ -123,12 +134,15 @@ const FormRegist = (props: FormFormRegistProps) => {
           onChange={formik.handleChange}
         />
       </div>
-      {formik.errors.password && (
-        <p className={cx("errors")}>{formik.errors.password}</p>
-      )}
 
       <label htmlFor="confirmPassword">Nhập lại mật khẩu</label>
-      <div className={cx("input-wrapper")}>
+      <div
+        className={
+          !formik.errors.confirmPassword
+            ? cx("input-wrapper")
+            : cx("input-wrapper", "error")
+        }
+      >
         <LockOpenIcon />
         <input
           type="password"
@@ -139,9 +153,6 @@ const FormRegist = (props: FormFormRegistProps) => {
           onChange={formik.handleChange}
         />
       </div>
-      {formik.errors.confirmPassword && (
-        <p className={cx("errors")}>{formik.errors.confirmPassword}</p>
-      )}
 
       <div
         style={{ justifyContent: "center", textDecoration: "none" }}
@@ -172,14 +183,6 @@ const FormRegist = (props: FormFormRegistProps) => {
           />
         )}
       </button>
-      <Button
-        startIcon={<GoogleIcon />}
-        type="button"
-        onClick={props.onLoginWithGoogle}
-        className={cx("btn", "regist")}
-      >
-        ĐĂNG KÝ VỚI GOOGLE
-      </Button>
     </form>
   );
 };

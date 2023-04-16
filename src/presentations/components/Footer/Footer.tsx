@@ -83,7 +83,7 @@ const Footer = () => {
   useEffect(() => {
     sendSucc &&
       setTimeout(() => {
-        toast.success("Cảm ơn đóng góp của bạn");
+        toast.success("Đăng kí tư vấn thành công!");
       }, 5000);
   });
 
@@ -124,7 +124,7 @@ const Footer = () => {
         className={cx("wrapper")}
       >
         <h2 className={cx("title")}>
-          GET YOUR <span>FREE</span> CONSULTATION NOW
+          Đăng Ký Nhận Tư Vấn <span>Miễn Phí</span>
         </h2>
         <Grid container columns={12} className={cx("form-wrapper")}>
           <Grid
@@ -138,11 +138,11 @@ const Footer = () => {
           >
             <Grid className={cx("contact-container")}>
               <h2 className={cx("form-contact-title")}>
-                Your Idea, <span>Our Expertise.</span>
+                Ý Tưởng Của Bạn <br /> <span>Trách Nhiệm Của Chúng Tôi</span>
               </h2>
               <p className={cx("form-contact-content")}>
-                We are a global leader in the new-age of digital product
-                development.
+                Quản lý các hoạt động nông nghiệp của bạn trở nên dễ dàng hơn
+                bao giờ hết
               </p>
             </Grid>
           </Grid>
@@ -163,7 +163,7 @@ const Footer = () => {
                   !formik.errors.name ? cx("input") : cx("input", "error")
                 }
                 type="text"
-                placeholder={"Name"}
+                placeholder={"Họ và Tên"}
               />
 
               <input
@@ -174,7 +174,7 @@ const Footer = () => {
                   !formik.errors.email ? cx("input") : cx("input", "error")
                 }
                 type="text"
-                placeholder="Email address"
+                placeholder="Địa chỉ email"
               />
 
               <input
@@ -185,14 +185,14 @@ const Footer = () => {
                   !formik.errors.phone ? cx("input") : cx("input", "error")
                 }
                 type="text"
-                placeholder="Contact number"
+                placeholder="Số điện thoại"
               />
 
               <textarea
                 id="comment"
                 value={formik.values.comment}
                 onChange={formik.handleChange}
-                placeholder="Write details of your ideas/project"
+                placeholder="Nội dung tư vấn"
                 rows={4}
                 className={
                   !formik.errors.comment ? cx("input") : cx("input", "error")
